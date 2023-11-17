@@ -1,4 +1,4 @@
-struct Residue{T,M}
+struct Residue{T,M}   # объекты праметризуются по типу М и значению М. Кольцо
     a::T
 end
 
@@ -28,7 +28,7 @@ function Base.:^(x::Residue{T,M}, n::Integer) where {T,M}
 end
 
 # Обращение обратимых элементов
-function inverse(x::Residue{T,M}) where {T,M}
+function inverse(x::Residue{T,M}) where {T,M}  #находит обратный элемент к х в кольце вычетов по модулю М с использованием расш. алг. Евклида, если эл. необратим выдаст ошибку.
     gcd_val, inv_val, _ = gcdx(x.a, M)
     if gcd_val != one(T)
         error("Element is not invertible")
@@ -37,6 +37,6 @@ function inverse(x::Residue{T,M}) where {T,M}
 end
 
 # Определение вывода значения в REPL
-function Base.display(x::Residue{T,M}) where {T,M}
+function Base.display(x::Residue{T,M}) where {T,M}    # выделяет способ отображения объектов типа Residue в REPL. используется для отображения внутреннего значения а.
     display(x.a)
 end
